@@ -6,12 +6,12 @@
   ],
   "cpu": "512",
   "memory": "1024",
-  "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskExecutionRole",
-  "taskRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskRole",
+  "executionRoleArn": "arn:aws:iam::854698772872:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::854698772872:role/ecsTaskRole",
   "containerDefinitions": [
     {
       "name": "learnflow-api",
-      "image": "YOUR_ACCOUNT_ID.dkr.ecr.YOUR_REGION.amazonaws.com/learnflow/microservice:latest",
+      "image": "854698772872.dkr.ecr.ap-south-2.amazonaws.com/learnflow/microservice:latest",
       "essential": true,
       "portMappings": [
         {
@@ -24,23 +24,34 @@
         {
           "name": "ENV",
           "value": "prod"
-        }
-      ],
-      "secrets": [
+        },
+        {
+          "name": "AWS_REGION",
+          "value": "ap-south-2"
+        },
+        {
+          "name": "S3_BUCKET",
+          "value": "learnflow-docs"
+        },
+        {
+          "name": "USE_S3_STORAGE",
+          "value": "true"
+        },
         {
           "name": "DATABASE_URL",
-          "valueFrom": "arn:aws:secretsmanager:YOUR_REGION:YOUR_ACCOUNT_ID:secret:learnflow/prod/DATABASE_URL"
+          "value": "postgresql+psycopg://postgres:Learnflow123@document-mapping.cn2a2uaicp1r.ap-south-2.rds.amazonaws.com:5432/document-mapping"
         },
         {
           "name": "OPENAI_API_KEY",
-          "valueFrom": "arn:aws:secretsmanager:YOUR_REGION:YOUR_ACCOUNT_ID:secret:learnflow/prod/OPENAI_API_KEY"
+          "value": "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"
         }
       ],
+      
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
           "awslogs-group": "/ecs/learnflow",
-          "awslogs-region": "YOUR_REGION",
+          "awslogs-region": "ap-south-2",
           "awslogs-stream-prefix": "ecs"
         }
       }
