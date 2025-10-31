@@ -1,0 +1,255 @@
+{
+  "info": {
+    "name": "GenAI Document Mapping API",
+    "description": "Complete API collection for Document Mapping Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["health"]
+            }
+          }
+        },
+        {
+          "name": "Root Info",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": [""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Documents",
+      "item": [
+        {
+          "name": "Upload Document",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/path/to/document.pdf"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8000/documents/upload",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["documents", "upload"]
+            }
+          }
+        },
+        {
+          "name": "Process Document",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"document_id\": \"{{document_id}}\",\n  \"chunk_size\": 1000,\n  \"chunk_overlap\": 200\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/documents/process",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["documents", "process"]
+            }
+          }
+        },
+        {
+          "name": "Vectorize Document",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"document_id\": \"{{document_id}}\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/documents/vectorize",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["documents", "vectorize"]
+            }
+          }
+        },
+        {
+          "name": "Get Document",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/documents/{{document_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["documents", "{{document_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Topics",
+      "item": [
+        {
+          "name": "Generate Topics",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"document_id\": \"{{document_id}}\",\n  \"num_topics\": 5\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/topics/generate",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["topics", "generate"]
+            }
+          }
+        },
+        {
+          "name": "Generate Subtopics",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"topic_id\": \"{{topic_id}}\",\n  \"num_subtopics\": 3\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/topics/subtopics/generate",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["topics", "subtopics", "generate"]
+            }
+          }
+        },
+        {
+          "name": "Generate Summary",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"topic_id\": \"{{topic_id}}\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/topics/summary/generate",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["topics", "summary", "generate"]
+            }
+          }
+        },
+        {
+          "name": "Get Topic Content",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"topic_id\": \"{{topic_id}}\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/topics/content",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["topics", "content"]
+            }
+          }
+        },
+        {
+          "name": "Get Document Topics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/topics/{{document_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["topics", "{{document_id}}"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "document_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "topic_id",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
+

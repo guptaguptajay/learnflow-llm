@@ -1,0 +1,43 @@
+# ============================================================================
+# AWS S3 Configuration - Add these to your .env file
+# ============================================================================
+
+# Required Settings
+AWS_REGION=us-east-1
+S3_BUCKET=your-bucket-name-here
+S3_PREFIX=documents/
+USE_S3_STORAGE=true
+
+# Optional: AWS Credentials 
+# (Not needed if using IAM roles on EC2/ECS/Lambda)
+# AWS_ACCESS_KEY_ID=your_access_key_here
+# AWS_SECRET_ACCESS_KEY=your_secret_key_here
+# AWS_SESSION_TOKEN=your_session_token_here
+
+# Optional: Custom S3 Endpoint
+# (For LocalStack, MinIO, or other S3-compatible storage)
+# S3_ENDPOINT_URL=http://localhost:4566
+
+# ============================================================================
+# Usage Examples:
+# ============================================================================
+#
+# Production (using IAM roles - RECOMMENDED):
+#   AWS_REGION=us-east-1
+#   S3_BUCKET=myapp-documents-prod
+#
+# Production (using explicit credentials):
+#   AWS_REGION=us-east-1
+#   S3_BUCKET=myapp-documents-prod
+#   AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+#   AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+#
+# Local Development (using LocalStack):
+#   AWS_REGION=us-east-1
+#   S3_BUCKET=test-bucket
+#   S3_ENDPOINT_URL=http://localhost:4566
+#   AWS_ACCESS_KEY_ID=test
+#   AWS_SECRET_ACCESS_KEY=test
+#
+# ============================================================================
+
