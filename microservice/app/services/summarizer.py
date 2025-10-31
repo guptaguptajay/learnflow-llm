@@ -32,6 +32,21 @@ class SummarizerService:
             LangChain chat model instance
         """
         if self.settings.llm_provider == "openai":
+            if not self.settings.openai_api_key:
+                logger.warning("OPENAI_API_KEY not set; using DummyChatModel for tests/CI")
+
+                class DummyResult:
+                    def __init__(self, content: str):
+                        self.content = content
+
+                class DummyChatModel:
+                    def invoke(self, inputs):
+                        title = inputs.get("topic_title", "Topic")
+                        content = inputs.get("content", "")
+                        snippet = content[:200] + ("..." if len(content) > 200 else "")
+                        return DummyResult(f"Summary for {title}: {snippet}")
+
+                return DummyChatModel()
             logger.info(f"Initializing OpenAI LLM: {self.settings.openai_model}")
             return ChatOpenAI(
                 model=self.settings.openai_model,

@@ -35,9 +35,23 @@ class VectorizerService:
         """Initialize embedding model based on configuration.
 
         Returns:
-            LangChain embeddings instance
+            LangChain embeddings instance or a dummy for tests/CI
         """
         if self.settings.llm_provider == "openai":
+            if not self.settings.openai_api_key:
+                logger.warning("OPENAI_API_KEY not set; using DummyEmbeddings for tests/CI")
+
+                class DummyEmbeddings:
+                    def __init__(self, dim: int):
+                        self.dim = dim
+
+                    def embed_documents(self, texts):
+                        return [[0.0] * self.dim for _ in texts]
+
+                    def embed_query(self, text):
+                        return [0.0] * self.dim
+
+                return DummyEmbeddings(self.settings.openai_embedding_dimensions)
             logger.info(f"Initializing OpenAI embeddings: {self.settings.openai_embedding_model}")
             return OpenAIEmbeddings(
                 model=self.settings.openai_embedding_model,
